@@ -55,7 +55,7 @@ class Person {
     }
   }
   poop(){
-    return this.stomach = [];
+    this.stomach = [];
   }
   toString(){
     return `${this.name}, ${this.age}`;
@@ -88,13 +88,13 @@ class Car {
   }
   drive(distance){
     const driveableMiles = this.milesPerGallon * this.tank;
-    if (distance < driveableMiles){
+    if (distance <= driveableMiles){
        this.odometer += distance;
        this.tank -= distance/this.milesPerGallon;
     } else {
       this.odometer += driveableMiles;
       this.tank = 0;
-      return `I ran out of fuel at ${driveableMiles} miles!`
+      return `I ran out of fuel at ${this.odometer} miles!`
     }
   }
 }
@@ -114,9 +114,9 @@ class Car {
 
 class Lambdasian {
   constructor({name, age, location}){
-    this.name = name,
-    this.age = age,
-    this.location = location
+    this.name = name;
+    this.age = age;
+    this.location = location;
   }
   speak(){
     return `Hello my name is ${this.name}, I am from ${this.location}`;
@@ -139,11 +139,11 @@ class Lambdasian {
 */
 
 class Instructor extends Lambdasian {
-  constructor(instructorAttr){
-    super(instructorAttr);
-    this.specialty = 'SQL';
-    this.favLanguage = 'C#';
-    this.catchPhrase = 'Don\'t forget the homies';  
+  constructor({name, age, location, specialty, favLanguage, catchPhrase}){
+    super({name, age, location, specialty, favLanguage, catchPhrase});
+    this.specialty = specialty;
+    this.favLanguage = favLanguage;
+    this.catchPhrase = catchPhrase;  
   }
   demo(subject){
     return `Today we are learning about ${subject}`;
@@ -170,14 +170,14 @@ class Instructor extends Lambdasian {
 */
 
 class Student extends Lambdasian{
-   constructor(studentAttr){
-    super(studentAttr);
-    this.previousBackground = "Plumber";
-    this.className = "WebEU 3";
-    this.favSubjects = ["JS", "Node", "Redux"];
+   constructor({name, age, location, previousBackground, className, favSubjects}){
+    super({name, age, location, previousBackground, className, favSubjects});
+    this.previousBackground = previousBackground;
+    this.className = className;
+    this.favSubjects = favSubjects;
    }
    listSubjects(){
-    return this.favSubjects.toString();
+    return `Loving ${this.favSubjects}!`;
    }
    PRAssignment(subject){
     return `${this.name} has submitted a PR for ${subject}`;
@@ -186,6 +186,17 @@ class Student extends Lambdasian{
     return `${this.name} has begun sprint challenge on ${subject}`;
    }
 }
+
+// const newStudent = new Student ({
+//   name: 'Miranda',
+//   age: 32,
+//   location: 'SoCal',
+//   previousBackground: ['Real Estate', 'Law', 'Operations'],
+//   className: 'Web',
+//   favSubjects: ['Security and Authentication', 'JavaScript']
+// });
+// console.log(newStudent);
+// console.log(newStudent.listSubjects());
 
 /*
   TASK 6
@@ -202,13 +213,10 @@ class Student extends Lambdasian{
 */
 
 class ProjectManager extends Instructor {
-   constructor(projectManagerAttr){
-    super(projectManagerAttr);
-    this.gradClassName = "Web25";
-    this.favInstructor = "Luis";
-    this.specialty = "Node";
-    this.favLanguage = "JavaScript";
-    this.catchPhrase = "Keep doing what you\'re doing!";
+   constructor({name, age, location, specialty, favLanguage, catchPhrase, gradClassName, favInstructor}){
+    super({name, age, location, specialty, favLanguage, catchPhrase, gradClassName, favInstructor});
+    this.gradClassName = gradClassName;
+    this.favInstructor = favInstructor;
    }
    standUp(slack){
     return `${this.name} announces to ${slack}, @channel standy times!`;
